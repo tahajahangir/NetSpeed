@@ -138,7 +138,7 @@ export const NetSpeed = GObject.registerClass({
     /**
      * NetSpeed: _speed_to_string
      */
-    _speed_to_string(amount) {
+   _speed_to_string(amount, short_version=true) {
         let m_digits = this.digits;
         let divider, byte_speed_map, bit_speed_map;
         if (this.bin_prefixes) {
@@ -151,12 +151,12 @@ export const NetSpeed = GObject.registerClass({
             bit_speed_map = [_("b/s"), _("kb/s"), _("Mb/s"), _("Gb/s")];
         }
         if (amount === 0)
-            return { text: "0", unit: _(this.use_bytes ? "B/s" : "b/s") };
+            return { text: "0", unit: short_version ? (this.use_bytes ? 'B' : 'b') : _(this.use_bytes ? "B/s" : "b/s") };
         if (m_digits < 3)
             m_digits = 3;
         amount *= 1000 * (this.use_bytes ? 1 : 8);
         let unit = 0;
-        while (amount >= divider && unit < 3) { // 1M=1024K, 1MB/s=1000MB/s
+        while (amount >= 1000 && unit < 3) { // 1M=1024K, 1MB/s=1000MB/s
             amount /= divider;
             ++unit;
         }
@@ -164,11 +164,14 @@ export const NetSpeed = GObject.registerClass({
         if (amount >= 100)
             m_digits -= 2;
         else if (amount >= 10)
+            m_digits -= 2;
+        else if (amount >= 1)
             m_digits -= 1;
 
+        unit = (this.use_bytes ? byte_speed_map : bit_speed_map)[unit];
         return {
             text: amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: m_digits - 1 }),
-            unit: (this.use_bytes ? byte_speed_map : bit_speed_map)[unit]
+            unit: short_version ? (this.use_bytes ? unit[0].toUpperCase() : unit[0].toLowerCase()) : unit
         };
     }
 
