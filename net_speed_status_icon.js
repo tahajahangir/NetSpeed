@@ -53,7 +53,7 @@ export default GObject.registerClass(class NetSpeedStatusIcon extends PanelMenu.
         this._download_box = new St.BoxLayout();
         this._down = new St.Label({ text: "---", style_class: 'ns-horizontal-label', y_align: Clutter.ActorAlign.CENTER });
         this._downunit = new St.Label({ text: "", style_class: 'ns-horizontal-unit-label', y_align: Clutter.ActorAlign.CENTER });
-        this._downicon = new St.Label({ text: "⬇", style_class: 'ns-horizontal-icon', y_align: Clutter.ActorAlign.CENTER });
+        this._downicon = new St.Label({ text: "⭣", style_class: 'ns-horizontal-icon', y_align: Clutter.ActorAlign.CENTER });
         this._download_box.add_child(this._down);
         this._download_box.add_child(this._downunit);
         this._download_box.add_child(this._downicon);
@@ -62,7 +62,7 @@ export default GObject.registerClass(class NetSpeedStatusIcon extends PanelMenu.
         this._upload_box = new St.BoxLayout();
         this._up = new St.Label({ text: "---", style_class: 'ns-horizontal-label', y_align: Clutter.ActorAlign.CENTER });
         this._upunit = new St.Label({ text: "", style_class: 'ns-horizontal-unit-label', y_align: Clutter.ActorAlign.CENTER });
-        this._upicon = new St.Label({ text: "⬆", style_class: 'ns-horizontal-icon', y_align: Clutter.ActorAlign.CENTER });
+        this._upicon = new St.Label({ text: "⭡", style_class: 'ns-horizontal-icon', y_align: Clutter.ActorAlign.CENTER });
         this._upload_box.add_child(this._up);
         this._upload_box.add_child(this._upunit);
         this._upload_box.add_child(this._upicon);
